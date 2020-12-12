@@ -48,4 +48,21 @@ func main() {
 
 	// There's also a type `byte` which an alias for `int8`
 
+	// Example of arithmetic
+	num1 := 10
+	num2 := 3
+	fmt.Println(num1 + num2)
+	fmt.Println(num1 - num2)
+	fmt.Println(num1 * num2)
+	fmt.Println(num1 / num2)
+	fmt.Println(num1 % num2)
+
+	// We cannot add different types. compile time error
+	var num3 int = 10
+	var num4 int8 = 3
+	// fmt.Println(num3 + num4)
+
+	// Type conversion to get it to work
+  fmt.Println(num3 + int(num4))
+
 }
