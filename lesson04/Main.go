@@ -63,6 +63,15 @@ func main() {
 	// fmt.Println(num3 + num4)
 
 	// Type conversion to get it to work
-  fmt.Println(num3 + int(num4))
+	fmt.Println(num3 + int(num4))
+	
+	// Bit operators
+	num5 := 10 // 1010
+	num6 := 3  // 0011
+
+	fmt.Println(num5 & num6) // AND 0010 = 2
+	fmt.Println(num5 | num6) // OR 1011 = 11
+	fmt.Println(num5 ^ num6) // XOR 1001 = 9
+	fmt.Println(num5 &^ num6) // num5 AND-NOT num6 1010 & 1100 = 1000 = 8
 
 }
