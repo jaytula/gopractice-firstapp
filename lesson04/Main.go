@@ -74,4 +74,9 @@ func main() {
 	fmt.Println(num5 ^ num6) // XOR 1001 = 9
 	fmt.Println(num5 &^ num6) // num5 AND-NOT num6 1010 & 1100 = 1000 = 8
 
+	// Bit shifting
+	num7 := 8
+	fmt.Println(num7 << 3) // 64
+	fmt.Println(num7 >> 3) // 1
+
 }
