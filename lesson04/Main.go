@@ -89,4 +89,12 @@ func main() {
 	
 	var myfloat2 float32 = 6.28
 	fmt.Printf("%v, %T\n", myfloat2, myfloat2)
+
+	// Arithmetic operation on floating point types
+	fnum1 := 10.2
+	fnum2 := 3.7
+	fmt.Println(fnum1 + fnum2)
+	fmt.Println(fnum1 - fnum2)
+	fmt.Println(fnum1 * fnum2)
+	fmt.Println(fnum1 / fnum2)
 }
