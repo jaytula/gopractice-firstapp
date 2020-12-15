@@ -79,4 +79,14 @@ func main() {
 	fmt.Println(num7 << 3) // 64
 	fmt.Println(num7 >> 3) // 1
 
+	// Floating-point types
+	// - float32
+	// - float64
+	myfloat := 3.14  // Initializer syntax is float64
+	myfloat = 13.7e72
+	myfloat = 2.1E14
+	fmt.Printf("%v, %T\n", myfloat, myfloat)
+	
+	var myfloat2 float32 = 6.28
+	fmt.Printf("%v, %T\n", myfloat2, myfloat2)
 }
