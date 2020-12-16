@@ -97,4 +97,30 @@ func main() {
 	fmt.Println(fnum1 - fnum2)
 	fmt.Println(fnum1 * fnum2)
 	fmt.Println(fnum1 / fnum2)
+
+	// Complex type (Imaginary numbers)
+	var cnum1 complex64 = 1 + 2i
+	var cnum2 complex64 = 2i
+	cnum3 := 2 + 3i
+
+	fmt.Printf("%v, %T\n", cnum1, cnum1)
+	fmt.Printf("%v, %T\n", cnum2, cnum2)
+	fmt.Printf("%v, %T\n", cnum3, cnum3)	
+
+	// Operations on Complex type
+	cnum4 := 1 + 2i
+	cnum5 := 2 + 5.2i
+	fmt.Println(cnum4 + cnum5)
+	fmt.Println(cnum4 - cnum5)
+	fmt.Println(cnum4 * cnum5)
+	fmt.Println(cnum4 / cnum5)
+
+	// Pulling out with `real` and `imag` builtin functions
+	fmt.Printf("%v, %T\n", real(cnum4), real(cnum4))
+	fmt.Printf("%v, %T\n", imag(cnum4), imag(cnum4))
+
+	// Making a complex number
+	var cnum6 complex128 = complex(5, 12)
+	fmt.Printf("%v, %T\n", cnum6, cnum6)
+
 }
