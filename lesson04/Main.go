@@ -11,7 +11,7 @@ import (
 	 - Floating point
 	 - Complex numbers
  - Text types
- */
+*/
 
 func main() {
 	var n bool = true
@@ -44,7 +44,7 @@ func main() {
 	// - uint8 (0, 255)
 	// - uint16 (0, 65535)
 	// - uint32 (0, 4294967295)
-	// - NO uint64 
+	// - NO uint64
 
 	// There's also a type `byte` which an alias for `int8`
 
@@ -64,14 +64,14 @@ func main() {
 
 	// Type conversion to get it to work
 	fmt.Println(num3 + int(num4))
-	
+
 	// Bit operators
 	num5 := 10 // 1010
 	num6 := 3  // 0011
 
-	fmt.Println(num5 & num6) // AND 0010 = 2
-	fmt.Println(num5 | num6) // OR 1011 = 11
-	fmt.Println(num5 ^ num6) // XOR 1001 = 9
+	fmt.Println(num5 & num6)  // AND 0010 = 2
+	fmt.Println(num5 | num6)  // OR 1011 = 11
+	fmt.Println(num5 ^ num6)  // XOR 1001 = 9
 	fmt.Println(num5 &^ num6) // num5 AND-NOT num6 1010 & 1100 = 1000 = 8
 
 	// Bit shifting
@@ -82,11 +82,11 @@ func main() {
 	// Floating-point types
 	// - float32
 	// - float64
-	myfloat := 3.14  // Initializer syntax is float64
+	myfloat := 3.14 // Initializer syntax is float64
 	myfloat = 13.7e72
-	myfloat = 2.1E14
+	myfloat = 2.1e14
 	fmt.Printf("%v, %T\n", myfloat, myfloat)
-	
+
 	var myfloat2 float32 = 6.28
 	fmt.Printf("%v, %T\n", myfloat2, myfloat2)
 
@@ -105,7 +105,7 @@ func main() {
 
 	fmt.Printf("%v, %T\n", cnum1, cnum1)
 	fmt.Printf("%v, %T\n", cnum2, cnum2)
-	fmt.Printf("%v, %T\n", cnum3, cnum3)	
+	fmt.Printf("%v, %T\n", cnum3, cnum3)
 
 	// Operations on Complex type
 	cnum4 := 1 + 2i
@@ -122,5 +122,27 @@ func main() {
 	// Making a complex number
 	var cnum6 complex128 = complex(5, 12)
 	fmt.Printf("%v, %T\n", cnum6, cnum6)
+
+	// Text Types: String (UTF-8)
+	str1 := "this is a string"
+	fmt.Printf("%v, %T\n", str1, str1)
+
+	// Strings can be treated like an array
+	// Note the type `uint8` which is a `byte`
+	fmt.Printf("%v, %T\n", str1[2], str1[2])
+
+	// Convert back as follows
+	fmt.Printf("%v, %T\n", string(str1[2]), str1[2])
+
+	// Strings are immutable. This is an error.
+	//str1[2] = "u"
+
+	// Strings can be concatenated with '+'
+	str2 := "yay"
+	fmt.Printf("%v, %T\n", str1+str2, str1+str2)
+
+	// Strings can be converted to a slice of bytes
+	mybytes1 := []byte(str1)
+	fmt.Printf("%v, %T\n", mybytes1, mybytes1)
 
 }
