@@ -145,4 +145,13 @@ func main() {
 	mybytes1 := []byte(str1)
 	fmt.Printf("%v, %T\n", mybytes1, mybytes1)
 
+	// Runes - represents UTF-32
+	// - UTF-8 char is a valid UTF-32
+	// - Declared with a single quote
+	// - runes type alias for int32
+	rune1 := 'a'
+	fmt.Printf("%v, %T\n", rune1, rune1)
+
+	var rune2 rune = 'b'
+	fmt.Printf("%v, %T\n", rune2, rune2)
 }
