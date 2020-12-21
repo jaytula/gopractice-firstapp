@@ -36,4 +36,9 @@ func main() {
 	var r int = 16
 	fmt.Printf("%v, %T\n", q+r, q+r)
 
+	// untyped constants -- implict conversions
+	const untypedConst1 = 42 // by itself would be 42, int.  seen by compiler as a literal 42
+	var typedConst1 int16 = 27
+	fmt.Printf("%v, %T\n", untypedConst1 + typedConst1, untypedConst1 + typedConst1)  // 69, int16 (42 + typedConst1)
+
 }
