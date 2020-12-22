@@ -7,6 +7,13 @@ import (
 // Example of package-level constant being shadowed
 const a int16 = 27
 
+// enumerated constants. iota is scoped to the const block
+const (
+	stuffA = iota
+	stuffB
+	stuffC
+)
+
 func main() {
 	fmt.Println("Lesson 05: Constants")
 	fmt.Println("- Naming convention")
@@ -39,6 +46,10 @@ func main() {
 	// untyped constants -- implict conversions
 	const untypedConst1 = 42 // by itself would be 42, int.  seen by compiler as a literal 42
 	var typedConst1 int16 = 27
-	fmt.Printf("%v, %T\n", untypedConst1 + typedConst1, untypedConst1 + typedConst1)  // 69, int16 (42 + typedConst1)
+	fmt.Printf("%v, %T\n", untypedConst1+typedConst1, untypedConst1+typedConst1) // 69, int16 (42 + typedConst1)
 
+	// enumerated constants
+	fmt.Printf("%v, %T\n", stuffA, stuffA) // (0, int)
+	fmt.Printf("%v, %T\n", stuffB, stuffB) // (1, int)
+	fmt.Printf("%v, %T\n", stuffC, stuffC) // (2, int)
 }
