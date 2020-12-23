@@ -14,6 +14,13 @@ const (
 	stuffC
 )
 
+const (
+	_ = iota + 5  // Discard initial generated value
+	catSpecialist
+	dogSpecialist
+	snakeSpecialist
+)
+
 func main() {
 	fmt.Println("Lesson 05: Constants")
 	fmt.Println("- Naming convention")
@@ -52,4 +59,8 @@ func main() {
 	fmt.Printf("%v, %T\n", stuffA, stuffA) // (0, int)
 	fmt.Printf("%v, %T\n", stuffB, stuffB) // (1, int)
 	fmt.Printf("%v, %T\n", stuffC, stuffC) // (2, int)
+
+	var specialistType int = catSpecialist
+	fmt.Printf("%v\n", catSpecialist)
+	fmt.Printf("%v\n", specialistType == catSpecialist)
 }
