@@ -21,6 +21,19 @@ const (
 	snakeSpecialist
 )
 
+// bytes
+const (
+	_ = iota                  // ignore first value
+	KB = 1 << (10 * iota)     // 1024 Bytes
+	MB
+	GB
+	TB
+	PB
+	EB
+	ZB
+	YB
+)
+
 func main() {
 	fmt.Println("Lesson 05: Constants")
 	fmt.Println("- Naming convention")
@@ -63,4 +76,7 @@ func main() {
 	var specialistType int = catSpecialist
 	fmt.Printf("%v\n", catSpecialist)
 	fmt.Printf("%v\n", specialistType == catSpecialist)
+
+	fileSize := 4000000000.
+	fmt.Printf("%.2fGB\n", fileSize/GB)
 }
