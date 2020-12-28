@@ -35,4 +35,7 @@ func main() {
 	fmt.Printf("Students: %v\n", students)
 	fmt.Printf("Student #2: %v\n", students[1])
 
+	// Determine length
+	fmt.Printf("Number of Studnts: %v\n", len(students))
+
 }
