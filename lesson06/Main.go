@@ -51,9 +51,15 @@ func main() {
 
 	// Arrays are considered values (not references)
 	a := [...]int{1,2,3}
-	b := a
+	b := a // b is assigned a copy of array a
 	b[1] = 5
 	fmt.Println(a) // [1, 2, 3]
 	fmt.Println(b) // [1, 5, 3]
 
+	c := &a
+	c[2] = 89
+	fmt.Println(a) // [1, 2, 89]
+	fmt.Println(c) // &[1, 2, 89]
+
+	// Arrays have a fixed size at compile-time, thus limitting their usefulness
 }
