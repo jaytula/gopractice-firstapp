@@ -62,4 +62,16 @@ func main() {
 	fmt.Println(c) // &[1, 2, 89]
 
 	// Arrays have a fixed size at compile-time, thus limitting their usefulness
+
+	// Arrays often used to back a slice
+	mySliceA := []int{1, 2, 3}
+	fmt.Println(mySliceA)
+	fmt.Printf("Length: %v\n", len(mySliceA))
+	// With slices, we also have a capacity
+	fmt.Printf("Capacity: %v\n", cap(mySliceA)) // Lenght of the underlying backing array
+	// Slices are refernece types
+	mySliceB := mySliceA
+	mySliceB[1] = 5  // Changes both
+	fmt.Println(mySliceA)
+	fmt.Println(mySliceB)
 }
