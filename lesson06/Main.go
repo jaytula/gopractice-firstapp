@@ -88,5 +88,26 @@ func main() {
 	fmt.Println(sc) // [4 5 6 7 8 9 10]
 	fmt.Println(sd) // [1 2 3 4 5 6]
 	fmt.Println(se) // [4 5 6]
-	
+
+	// Changing changes because slice is like a reference type
+	sa[5] = 42
+	fmt.Println(sa) // [1 2 3 4 5 42 7 8 9 10]
+	fmt.Println(sb) // [1 2 3 4 5 42 7 8 9 10]
+	fmt.Println(sc) // [4 5 42 7 8 9 10]
+	fmt.Println(sd) // [1 2 3 4 5 42]
+	fmt.Println(se) // [4 5 42]
+
+	// - You can slice an array or a slice
+
+	// Using make. 1st argument is the type, 2nd is the length
+	ma := make([]int, 3)
+	fmt.Println(ma) // [0 0 0]
+	fmt.Printf("Length: %v\n", len(ma))
+	fmt.Printf("Capacity: %v\n", cap(ma))
+
+	// Make can have a third argumeent for capacity
+	mb := make([]int, 3, 100)
+	fmt.Println(mb) // [0 0 0]
+	fmt.Printf("Length: %v\n", len(mb))
+	fmt.Printf("Capacity: %v\n", cap(mb))
 }
