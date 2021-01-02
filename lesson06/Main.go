@@ -67,11 +67,26 @@ func main() {
 	mySliceA := []int{1, 2, 3}
 	fmt.Println(mySliceA)
 	fmt.Printf("Length: %v\n", len(mySliceA))
+
 	// With slices, we also have a capacity
 	fmt.Printf("Capacity: %v\n", cap(mySliceA)) // Lenght of the underlying backing array
+
 	// Slices are refernece types
 	mySliceB := mySliceA
 	mySliceB[1] = 5  // Changes both
 	fmt.Println(mySliceA)
 	fmt.Println(mySliceB)
+
+	// Other was to create a slice
+	sa := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	sb := sa[:] // slice of all elements
+	sc := sa[3:] // slice from the 4th element to the end
+	sd := sa[:6] // slice first 6 elements
+	se := sa[3:6] // slice of the 4th 5th and 6th elements
+	fmt.Println(sa) // [1 2 3 4 5 6 7 8 9 10]
+	fmt.Println(sb) // [1 2 3 4 5 6 7 8 9 10]
+	fmt.Println(sc) // [4 5 6 7 8 9 10]
+	fmt.Println(sd) // [1 2 3 4 5 6]
+	fmt.Println(se) // [4 5 6]
+	
 }
