@@ -110,4 +110,21 @@ func main() {
 	fmt.Println(mb) // [0 0 0]
 	fmt.Printf("Length: %v\n", len(mb))
 	fmt.Printf("Capacity: %v\n", cap(mb))
+
+	// Slice of int with no elements
+	s0 := []int{}
+	fmt.Printf("%v\n", s0)
+	fmt.Printf("Length %v\n", len(s0))
+	fmt.Printf("Capacity %v\n", cap(s0))
+
+	// Use append to add to slice
+	s0 = append(s0, 1)
+	fmt.Printf("%v\n", s0)
+	fmt.Printf("Length %v\n", len(s0))
+	fmt.Printf("Capacity %v\n", cap(s0))
+ 
+	s0 = append(s0, 2, 3, 4, 5, 6, 7, 8, 9)
+	fmt.Printf("%v\n", s0)
+	fmt.Printf("Length %v\n", len(s0))
+	fmt.Printf("Capacity %v\n", cap(s0))
 }
