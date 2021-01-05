@@ -134,4 +134,27 @@ func main() {
 	fmt.Printf("Length %v\n", len(s1))
 	fmt.Printf("Capacity %v\n", cap(s1))
 
+	// Using slices as a stack
+	stack1 := []int{1, 2, 3, 4, 5}
+	fmt.Printf("%v\n", stack1)
+	fmt.Printf("Length %v\n", len(stack1))
+	fmt.Printf("Capacity %v\n", cap(stack1))
+
+	// Push with append
+	stack1 = append(stack1, 6)
+	fmt.Printf("%v\n", stack1)
+	fmt.Printf("Length %v\n", len(stack1))
+	fmt.Printf("Capacity %v\n", cap(stack1))
+
+	// Shift element
+	shifted1 := stack1[1:]
+	fmt.Printf("%v\n", shifted1)
+	fmt.Printf("Length %v\n", len(shifted1))
+	fmt.Printf("Capacity %v\n", cap(shifted1))
+
+	// Trim element
+	trimmed1 := stack1[:len(stack1)-1]
+	fmt.Printf("%v\n", trimmed1)
+	fmt.Printf("Length %v\n", len(trimmed1))
+	fmt.Printf("Capacity %v\n", cap(trimmed1))
 }
