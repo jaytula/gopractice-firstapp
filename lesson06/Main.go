@@ -157,4 +157,14 @@ func main() {
 	fmt.Printf("%v\n", trimmed1)
 	fmt.Printf("Length %v\n", len(trimmed1))
 	fmt.Printf("Capacity %v\n", cap(trimmed1))
+
+	// Remove element from the middle
+	slice1 := []int{1,2,3,4,5}
+	slice2 := append(slice1[:2], slice1[3:]...)
+	fmt.Printf("%v\n", slice2)
+	fmt.Printf("Length %v\n", len(slice2))
+	fmt.Printf("Capacity %v\n", cap(slice2))
+	fmt.Printf("%v\n", slice1)  // [1 2 4 5 5] be careful, original slice is modified
+	fmt.Printf("Length %v\n", len(slice1))
+	fmt.Printf("Capacity %v\n", cap(slice1))
 }
