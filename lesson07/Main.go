@@ -32,4 +32,38 @@ func main() {
 	// - slices
 	// - maps
 	// - other functions
+
+	// m := map[[]int]string{} // Invalid map key type
+	n := map[[3]int]string{} // Ok
+	fmt.Println(n)
+
+	// Declaring a map with make
+	statePopulations2 := make(map[string]int)
+  statePopulations2 = map[string]int{
+		"Ca": 12345,
+		"Nv": 888,
+	}
+	fmt.Println(statePopulations2)
+
+	// Getting an element of map
+	fmt.Println(statePopulations2["Nv"])
+
+	// Add value to map
+	statePopulations2["Fl"] = 9999
+	fmt.Println(statePopulations2)
+
+	// Delete from map
+	delete(statePopulations2, "Ca")
+	fmt.Println(statePopulations2)
+
+	fmt.Println(statePopulations2["Cda"])  // Returns zero for invalid key
+
+	// Comma, ok to determine if key is valid
+	pop, ok := statePopulations2["Nv"]
+	fmt.Println(pop, ok)
+
+	// Throw away value
+	_, ok2 := statePopulations2["Ca"]
+	fmt.Println(ok2)
+
 }
