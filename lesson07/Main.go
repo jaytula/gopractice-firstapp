@@ -42,6 +42,7 @@ func main() {
   statePopulations2 = map[string]int{
 		"Ca": 12345,
 		"Nv": 888,
+		"Mo": 333,
 	}
 	fmt.Println(statePopulations2)
 
@@ -66,4 +67,13 @@ func main() {
 	_, ok2 := statePopulations2["Ca"]
 	fmt.Println(ok2)
 
+	// Length of map works
+	fmt.Println(len(statePopulations2))
+
+	// Maps are reference types. Add
+	statePopulations2Ref := statePopulations2
+	statePopulations2["Ut"] = 27
+	statePopulations2["Nv"] = 999
+	fmt.Println(statePopulations2)
+	fmt.Println(statePopulations2Ref)
 }
