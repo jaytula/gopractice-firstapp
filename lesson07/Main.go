@@ -3,6 +3,12 @@ import (
 	"fmt"
 )
 
+type Doctor struct {
+	number int
+	actorName string
+	companions []string
+}
+
 func main() {
 	fmt.Println("Maps and Structs")
 	
@@ -76,4 +82,26 @@ func main() {
 	statePopulations2["Nv"] = 999
 	fmt.Println(statePopulations2)
 	fmt.Println(statePopulations2Ref)
+
+	// Struct Collection type - gathers information that can have different types.
+	aDoctor := Doctor{
+		number: 3,
+		actorName: "Jon Pertwee",
+		companions: []string {"Liz Shaw", "Jo Grant", "Sarah Jane Smith"},
+	}
+	fmt.Println(aDoctor)
+
+	// Use dot-syntax to get a Struct member
+	fmt.Println(aDoctor.actorName)
+	fmt.Println(aDoctor.companions[1])
+
+	// Position syntax with Struct
+	// - This works but is not recommended because if struct changes, it breaks
+	bDoctor := Doctor{
+		3,
+		"Jon Pertwee",
+		[]string {"Liz Shaw", "Jo Grant", "Sarah Jane Smith"},
+	}
+	fmt.Println(bDoctor)
+
 }
