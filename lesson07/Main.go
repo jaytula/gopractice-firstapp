@@ -1,26 +1,29 @@
 package main
+
 import (
 	"fmt"
 )
 
+// Doctor Struct is exported from package because it is capitalized
+// Number field is exported but actorName and companions are not
 type Doctor struct {
-	number int
-	actorName string
+	Number     int
+	actorName  string
 	companions []string
 }
 
 func main() {
 	fmt.Println("Maps and Structs")
-	
+
 	// Maps map a key type to a value type
 	statePopulations := map[string]int{
-		"California": 39250017,
-		"Texas": 27862596,
-		"Florida": 20612439,
-		"New York": 19745289,
+		"California":   39250017,
+		"Texas":        27862596,
+		"Florida":      20612439,
+		"New York":     19745289,
 		"Penssylvania": 12802503,
-		"Illinois": 12801539,
-		"Ohio": 11614373,
+		"Illinois":     12801539,
+		"Ohio":         11614373,
 	}
 	fmt.Println(statePopulations)
 
@@ -45,7 +48,7 @@ func main() {
 
 	// Declaring a map with make
 	statePopulations2 := make(map[string]int)
-  statePopulations2 = map[string]int{
+	statePopulations2 = map[string]int{
 		"Ca": 12345,
 		"Nv": 888,
 		"Mo": 333,
@@ -63,7 +66,7 @@ func main() {
 	delete(statePopulations2, "Ca")
 	fmt.Println(statePopulations2)
 
-	fmt.Println(statePopulations2["Cda"])  // Returns zero for invalid key
+	fmt.Println(statePopulations2["Cda"]) // Returns zero for invalid key
 
 	// Comma, ok to determine if key is valid
 	pop, ok := statePopulations2["Nv"]
@@ -85,9 +88,9 @@ func main() {
 
 	// Struct Collection type - gathers information that can have different types.
 	aDoctor := Doctor{
-		number: 3,
-		actorName: "Jon Pertwee",
-		companions: []string {"Liz Shaw", "Jo Grant", "Sarah Jane Smith"},
+		Number:     3,
+		actorName:  "Jon Pertwee",
+		companions: []string{"Liz Shaw", "Jo Grant", "Sarah Jane Smith"},
 	}
 	fmt.Println(aDoctor)
 
@@ -100,8 +103,12 @@ func main() {
 	bDoctor := Doctor{
 		3,
 		"Jon Pertwee",
-		[]string {"Liz Shaw", "Jo Grant", "Sarah Jane Smith"},
+		[]string{"Liz Shaw", "Jo Grant", "Sarah Jane Smith"},
 	}
 	fmt.Println(bDoctor)
 
+	// Example of anonymous struct
+	// Use when struct is only used one time
+	cDoctor := struct{ name string }{name: "John Pertwee"}
+	fmt.Println(cDoctor)
 }
