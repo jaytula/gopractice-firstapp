@@ -111,4 +111,16 @@ func main() {
 	// Use when struct is only used one time
 	cDoctor := struct{ name string }{name: "John Pertwee"}
 	fmt.Println(cDoctor)
+
+	// Structs are values types
+	anotherDoc := cDoctor
+	cDoctor.name = "Bluewings"
+	fmt.Println(cDoctor)    // {Bluewings}
+	fmt.Println(anotherDoc) // {John Pertwee}
+
+	// We can point to the same underlying data of struct with '&'
+	sameDoc := &cDoctor
+	cDoctor.name = "Odo"
+	fmt.Println(cDoctor) // {Odo}
+	fmt.Println(sameDoc) // &{Odo}
 }
