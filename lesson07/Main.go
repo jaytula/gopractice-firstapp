@@ -12,6 +12,17 @@ type Doctor struct {
 	companions []string
 }
 
+type Animal struct {
+	Name string
+	Origin string
+}
+
+type Bird struct {
+	Animal
+	SpeedKPH float32
+	CanFly bool
+}
+
 func main() {
 	fmt.Println("Maps and Structs")
 
@@ -123,4 +134,20 @@ func main() {
 	cDoctor.name = "Odo"
 	fmt.Println(cDoctor) // {Odo}
 	fmt.Println(sameDoc) // &{Odo}
+
+	// Embedding/Composition
+	// Bird has Animal-like characteristics
+	bird := Bird{}
+	bird.Name = "Emu"
+	bird.Origin = "Australia"
+	bird.SpeedKPH = 48
+	bird.CanFly = false
+	fmt.Println(bird)
+
+	// Literal syntax - need to be aware of embedding
+	bird2 := Bird{Animal: Animal{Name: "Bayou", Origin: "New Zealand"}, SpeedKPH: 15, CanFly: true}
+	fmt.Println(bird2)
+
+	// - When modeling behavior, embedding is not the right choice
+	// - Interfaces are more appropriate to describe common behavior
 }
