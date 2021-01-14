@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 )
 
 // Doctor Struct is exported from package because it is capitalized
@@ -12,11 +13,19 @@ type Doctor struct {
 	companions []string
 }
 
+// Animal an animal
 type Animal struct {
 	Name string
 	Origin string
 }
 
+// Creature a creature
+type Creature struct {
+	Name string   `required:"true" max:"100"`
+	Origin string
+}
+
+// Bird a bird
 type Bird struct {
 	Animal
 	SpeedKPH float32
@@ -150,4 +159,9 @@ func main() {
 
 	// - When modeling behavior, embedding is not the right choice
 	// - Interfaces are more appropriate to describe common behavior
+
+	// Tags - Creature struct
+	t := reflect.TypeOf(Creature{})
+	field, _ := t.FieldByName("Name")
+	fmt.Println(field.Tag) // 'required:"true" max:"100"', it is up to you how to interpret the tag
 }
