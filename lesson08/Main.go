@@ -43,9 +43,44 @@ func main() {
 	guess = 70
 	fmt.Println(number<=guess, number>=guess, number!=guess)
 
-	// There is also boolean operators || and &&
+	// There are boolean operators || and && and !
 	guess = -1
 	if guess < 1 || guess > 100 {
 		fmt.Println("Number is not between 1 and 100")
 	}
+
+	// Example && usage
+	guess = 100
+	if guess >= 1 && guess <= 100 {
+		fmt.Println("Number is between 1 and 100")
+	}
+
+	guess = 96
+	// Example usage of NOT ! operator
+	if !(guess < 95) {
+		fmt.Printf("Number %d is not less than 95\n", guess)
+	}
+
+	// Short-circuit example with or
+	guess = 1
+	if guess == 1 || returnTrue() { // returnTrue is not run because we already got our true
+		fmt.Println("guess is 1")
+	}
+	guess = 0
+	if guess == 1 || returnTrue() {
+		fmt.Println("guess is 1")
+	}
+
+	// If-else example
+	guess = 1
+	if guess == 2 {
+		fmt.Println("Guess is two")
+	} else {
+		fmt.Println("Guess is not two")
+	}
+}
+
+func returnTrue() bool {
+	fmt.Println("returning true")
+	return true
 }
