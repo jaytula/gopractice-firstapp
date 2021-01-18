@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 func main() {
@@ -77,6 +78,44 @@ func main() {
 		fmt.Println("Guess is two")
 	} else {
 		fmt.Println("Guess is not two")
+	}
+
+	// Else if
+	guess = 30
+	if guess < 1 {
+		fmt.Println("The guess must be greater than 1")
+	} else if guess > 100 {
+		fmt.Println("The guess must be less than 100")
+	} else {
+		fmt.Println("Between")
+	}
+
+	// Floating point number calculations are inexact
+	myNum := 0.123
+	if myNum == math.Pow(math.Sqrt(myNum), 2) {
+		fmt.Println("These are the same")
+	} else {
+		fmt.Println("These are different")
+		fmt.Printf("%f %f\n", myNum, math.Pow(math.Sqrt(myNum), 2))
+	}
+
+	// Better way
+	myNum = 0.123456789
+	if math.Abs(myNum / math.Pow(math.Sqrt(myNum), 2) - 1) < 0.0001 {
+		fmt.Println("These are the same")
+	} else {
+		fmt.Println("These are different")
+		fmt.Printf("%f %f\n", myNum, math.Pow(math.Sqrt(myNum), 2))
+	}
+
+	// Switch statement - simple example
+	switch 2 {
+	case 1:
+		fmt.Println("one")
+	case 2:
+		fmt.Println("two")
+	default:
+		fmt.Println("not one or two")
 	}
 }
 
