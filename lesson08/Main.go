@@ -117,6 +117,50 @@ func main() {
 	default:
 		fmt.Println("not one or two")
 	}
+
+	// Instead of fall-through case. We can specify multiple items in a case
+	switch 7 {
+	case 1, 5, 10:
+		fmt.Println("one, five or ten")
+	case 2, 4, 6:
+		fmt.Println("two, four, or six")
+	default:
+		fmt.Println("something else")
+	}
+
+	// Can use an initializer for switch value
+	switch i1:= 2 + 3; i1 {
+	case 1, 5, 10:
+		fmt.Println("one, five or ten")
+	case 2, 4, 6:
+		fmt.Println("two, four, or six")
+	default:
+		fmt.Println("something else")
+	}
+
+	// Another syntax for case, 'tag-less'
+	j := 11
+	switch {
+	case j <= 10:
+		fmt.Println("Less than or equal 10")
+	case j <= 20:
+		fmt.Println("less than or equal 20")
+	default:
+		fmt.Println("Greater than 20")
+	}
+
+	// Go switch has implicit break.  Use fallthrough keyword
+	// Note fallthrough is logic-less. It will fall-through no matter what.
+	j = 10
+	switch {
+	case j <= 10:
+		fmt.Println("Less than or equal 10")
+		fallthrough
+	case j >= 20:
+		fmt.Println("less than or equal 20")
+	default:
+		fmt.Println("Greater than 20")
+	}
 }
 
 func returnTrue() bool {
