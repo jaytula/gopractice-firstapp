@@ -161,6 +161,30 @@ func main() {
 	default:
 		fmt.Println("Greater than 20")
 	}
+
+	// Example of type-switch
+	var iface1 interface{} = "asdf"
+	typeSwitch(iface1)
+	typeSwitch(2)
+	typeSwitch(2.4)
+	typeSwitch([3]int{1, 2, 3})
+}
+
+func typeSwitch(iface1 interface{}) {
+	switch iface1.(type) {
+	case int:
+		fmt.Println("iface1 is an int")
+		// break
+		fmt.Println("This will print too")
+	case float64:
+		fmt.Println("iface1 is a float64")
+	case string:
+		fmt.Println("iface1 is a string")
+	case [3]int:
+	  fmt.Println("iface1 is an array of three values")
+	default:
+		fmt.Println("iface1 is another type")
+	}
 }
 
 func returnTrue() bool {
