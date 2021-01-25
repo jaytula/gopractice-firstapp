@@ -40,11 +40,44 @@ func httpExample() {
 	fmt.Printf("%s", robots)
 }
 
+func exampleApp() {
+	a := "start"
+	defer fmt.Println(a)  // Print "start"
+	a = "end"
+}
+
+func panicExample() {
+	a, b := 1, 0
+	ans := a / b
+	fmt.Println(ans)
+}
+
+func panicManual() {
+	fmt.Println("start")
+	panic("something bad happened")
+	fmt.Println("end")
+}
+
+func httpPanicExample() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Hello Go!"))
+	})
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		// We manually panic here if port is already taken
+		panic(err.Error())
+	}
+}
+
 func main() {
 	fmt.Println("main: start")
 	deferExample1()
 	deferExample2()
 	httpExample()
+	exampleApp()
+	// panicExample();
+	// panicManual();
+	httpPanicExample()
 	fmt.Println("main: end")
 }
 
