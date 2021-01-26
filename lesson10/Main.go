@@ -69,6 +69,38 @@ func httpPanicExample() {
 	}
 }
 
+func panicManualVersion2() {
+	fmt.Println("start")
+	defer fmt.Println("this was deferred") // This runs before the panic takes hold
+	panic("something bad happened")
+	fmt.Println("end")
+}
+
+func panicManualVersion3() {
+	fmt.Println("v3:start")
+	// Note that defer takes a function call
+	defer func() {
+		if err := recover(); err != nil {
+			log.Println("Error:", err)
+		}
+	}()
+	panic("something bad happened")
+	fmt.Println("v3:end") // Note that this does not print
+}
+
+func panicker() {
+	fmt.Println("about to panic")
+	defer func() {
+		if err := recover(); err != nil {
+			log.Println("Error:", err)
+			// Optionally re-panic if the error is really bad
+			panic(err)
+		}
+	}()
+	panic("something bad happened 2")
+	fmt.Println("done panicking")  // The panicked function stops but higher up th call stack can continue
+}
+
 func main() {
 	fmt.Println("main: start")
 	deferExample1()
@@ -77,7 +109,10 @@ func main() {
 	exampleApp()
 	// panicExample();
 	// panicManual();
-	httpPanicExample()
+	// httpPanicExample()
+	// panicManualVersion2()
+	// panicManualVersion3()
+	panicker()
 	fmt.Println("main: end")
 }
 
