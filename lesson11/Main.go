@@ -35,4 +35,35 @@ func main() {
 	// c3 := &a3[1] + 1 // Pointer arithmtetic not allowed.  Use unsafe package if needed.
 
 	fmt.Printf("%v %p %p\n", a3, b3, c3) // [1 2 3] 0xc000130020 0xc000130028 (diff in address indicatrs 8-bytes apart)
+
+	var ms *myStruct
+	fmt.Println(ms) // <nil>
+	ms = &myStruct{foo: 42}
+	fmt.Println(ms) // &{42}
+
+	ms = new(myStruct)
+	fmt.Println(ms) // &{0}
+	(*ms).foo = 27
+	fmt.Println(ms) // &{27}
+	fmt.Println((*ms).foo) // 27
+	ms.foo = 42
+	fmt.Println(ms.foo)
+
+	// Copy by value
+	a4 := [3]int{1, 2, 3}
+	b4 := a4  // A copy
+	fmt.Println(a4, b4)
+	a4[1] = 42
+	fmt.Println(a4, b4) // [1 42 3] [1 2 3]
+
+	// Slice by reference
+	a5 := []int{1, 2, 3}
+	b5 := a5  
+	fmt.Println(a5, b5)
+	a5[1] = 42
+	fmt.Println(a5, b5) // [1 42 3] [1 42 3]
+}
+
+type myStruct struct {
+	foo int
 }
