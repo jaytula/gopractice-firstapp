@@ -62,6 +62,13 @@ func main() {
 	fmt.Println(a5, b5)
 	a5[1] = 42
 	fmt.Println(a5, b5) // [1 42 3] [1 42 3]
+
+	// Maps are also by reference
+	m1 := map[string]string {"foo": "bar", "baz": "buz"}
+	m2 := m1
+	fmt.Println(m1, m2)
+	m1["foo"] = "quz"
+	fmt.Println(m1, m2) // Both changed
 }
 
 type myStruct struct {
