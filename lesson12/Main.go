@@ -38,9 +38,56 @@ func main() {
 	dr, err := divide(5.0, 0.0)
 	if err != nil {
 		fmt.Println(err)
-		return
 	}
 	fmt.Println(dr)
+
+	// Immediately invoked anonymous function
+	func() {
+		fmt.Println("I am anonymous!")
+	}()
+
+	// Works okay but once we get into async code...
+	for i := 0; i < 5; i++ {
+		func() {
+			fmt.Println(i)
+		}()
+	}
+
+	// Works better with async
+	for i := 0; i < 5; i++ {
+		func(i int) {
+			fmt.Println(i)
+		}(i)
+	}
+
+	f := func() {
+		fmt.Println("Hello Go!")
+	}
+
+	f()
+
+	// Type signature of anonymous function
+	var f2 func() = func() {
+		fmt.Println("Signatures")
+	}
+	f2()
+
+	// More complex fn signature
+	var divide2 func(float64, float64) (float64, error)
+	divide2 = func(a, b float64) (float64, error) {
+		if b == 0.0 {
+			return 0.0, fmt.Errorf("Cannot divide by zero")
+		}
+		return a / b, nil
+	}
+
+	d2, err := divide2(5.0, 3.0)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(d2)
+	}
+
 }
 
 // Example of a function with one parameter
