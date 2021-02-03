@@ -88,6 +88,18 @@ func main() {
 		fmt.Println(d2)
 	}
 
+	// Delclare greeter struct
+	g := greeter{
+		greeting: "Hello",
+		name: "Gogo",
+	}
+
+	// Invoke method on greeter
+	g.greet()
+	fmt.Println("g.name: ", g.name)
+
+	g.greetByRef()
+	fmt.Println("g.name: ", g.name)
 }
 
 // Example of a function with one parameter
@@ -152,4 +164,23 @@ func divide(a, b float64) (float64, error) {
 		return 0.0, fmt.Errorf("Cannot divide by zero")
 	}
 	return a / b, nil
+}
+
+type greeter struct {
+	greeting string
+	name string
+}
+
+// Example method on greeter context
+// greeter is value type - known as a value receiver here
+// operating on copy
+func (g greeter) greet() {
+	fmt.Println(g.greeting, g.name)
+	g.name = "" // Has no effect outside
+}
+
+// Method with pointer receiver
+func (g *greeter) greetByRef() {
+	fmt.Println(g.greeting, g.name)
+	g.name = "" // Has no effect outside
 }
