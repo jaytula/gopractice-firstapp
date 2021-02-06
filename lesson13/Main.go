@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"bytes"
 )
 
 // - Basics
@@ -27,6 +28,10 @@ func main() {
 	for i := 0; i < 10; i++ {
 	  fmt.Println(inc.Increment())
 	}
+
+	var wc WriterCloser = NewBufferedWriterCloser()
+	wc.Write([]byte("Hello YouTube listeners, this is a test"))
+	wc.Close()
 }
 
 // Writer Interfaces describe behavior. So instead of data, we have methods
@@ -58,4 +63,61 @@ type IntCounter int
 func (ic *IntCounter) Increment() int {
 	*ic++
 	return int(*ic)
+}
+
+// Interface composition example
+
+// Closer interface
+type Closer interface {
+	Close() error
+}
+
+// WriterCloser interface
+type WriterCloser interface {
+	Writer
+	Closer
+}
+
+// BufferedWriterCloser struct
+type BufferedWriterCloser struct {
+	buffer *bytes.Buffer
+}
+
+func (bwc *BufferedWriterCloser) Write(data []byte) (int, error) {
+	n, err := bwc.buffer.Write(data)
+	if err != nil {
+		return 0, err
+	}
+
+	v := make([]byte, 8)
+	for bwc.buffer.Len() > 8 {
+		_, err := bwc.buffer.Read(v)
+		if err != nil {
+			return 0, err
+		}
+		_, err = fmt.Println(string(v))
+		if err != nil {
+			return 0, err
+		}
+	}
+	return n, nil
+}
+
+// Close method
+func (bwc *BufferedWriterCloser) Close() error {
+	for bwc.buffer.Len() > 0 {
+		data := bwc.buffer.Next(8)
+		_, err := fmt.Println(string(data))
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// NewBufferedWriterCloser constructor
+func NewBufferedWriterCloser() *BufferedWriterCloser {
+	return &BufferedWriterCloser{
+		buffer: bytes.NewBuffer([]byte{}),
+	}
 }
