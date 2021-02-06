@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"bytes"
+	"io"
 )
 
 // - Basics
@@ -32,6 +33,24 @@ func main() {
 	var wc WriterCloser = NewBufferedWriterCloser()
 	wc.Write([]byte("Hello YouTube listeners, this is a test"))
 	wc.Close()
+
+	var wc2 WriterCloser = NewBufferedWriterCloser()
+	wc2.Write([]byte("Hello again"))
+	wc2.Close()
+
+	bwc := wc2.(*BufferedWriterCloser)  // Example of Type Conversion
+	fmt.Println(bwc)
+
+	// wwc := wc2.(io.Reader)  // Example of failed Type conversion: Missing method Read. Panics!!!
+	// fmt.Println(wwc)
+
+	// Comma-ok syntax. Does not panic
+	r, ok := wc2.(io.Reader)
+	if ok {
+		fmt.Println(r)
+	} else {
+		fmt.Println("Conversion failed")
+	}
 }
 
 // Writer Interfaces describe behavior. So instead of data, we have methods
