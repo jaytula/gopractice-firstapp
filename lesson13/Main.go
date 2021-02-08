@@ -51,6 +51,22 @@ func main() {
 	} else {
 		fmt.Println("Conversion failed")
 	}
+
+	// Empty interface
+	var myObj interface{} = NewBufferedWriterCloser()
+
+	// Type-cast into a WriterCloser using comma-ok syntax
+	if wc3, ok := myObj.(WriterCloser); ok {
+		wc3.Write([]byte("Yay, typecast worked"))
+		wc3.Close()
+	}
+	r2, ok := myObj.(io.Reader)
+	if ok {
+		fmt.Println(r2)
+	} else {
+		fmt.Println("Conversion failed")
+	}
+
 }
 
 // Writer Interfaces describe behavior. So instead of data, we have methods
