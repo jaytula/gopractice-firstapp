@@ -78,6 +78,8 @@ func main() {
 		fmt.Println("I2 don't know what i2 is")
 	}
 
+	var wc4 WriterCloser = myWriterCloser{}
+	fmt.Println(wc4)
 }
 
 // Writer Interfaces describe behavior. So instead of data, we have methods
@@ -122,6 +124,22 @@ type Closer interface {
 type WriterCloser interface {
 	Writer
 	Closer
+}
+
+type myWriterCloser struct {}
+
+// func (mwc *myWriterCloser) Write(data []byte) (int, error) { This would be an error
+// - When working with types, method set is all the methods regardless of receiver type
+// - When working with interfaces and using the concrete value (not the address), the method set for a value is any
+// method that has a value as the receiver
+// Can fix by using `var wc4 WriterCloser = &myWriterCloser{}`
+// - The method set for a pointer is the sum of the value and pointer receiver methods.
+func (mwc myWriterCloser) Write(data []byte) (int, error) {
+	return 0, nil
+}
+
+func (mwc myWriterCloser) Close() error {
+	return nil
 }
 
 // BufferedWriterCloser struct
