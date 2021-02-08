@@ -67,6 +67,17 @@ func main() {
 		fmt.Println("Conversion failed")
 	}
 
+	// Type Switch.  dot then parentheses with type variable
+	var i2 interface{} = 0
+	switch i2.(type) {
+	case int:
+		fmt.Println("i2 is an integer")
+	case string:
+		fmt.Println("i2 is a string")
+	default:
+		fmt.Println("I2 don't know what i2 is")
+	}
+
 }
 
 // Writer Interfaces describe behavior. So instead of data, we have methods
