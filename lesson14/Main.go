@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 // Goroutines
@@ -13,5 +14,10 @@ import (
 // - Best Practices
 
 func main() {
-  fmt.Println("GoRoutines")
+  go sayHello() // Prefix with 'go' to spin off into a green thread. Light-weight abstraction for a thread
+	time.Sleep(100 * time.Millisecond)
+}
+
+func sayHello() {
+	fmt.Println("Hello")
 }
