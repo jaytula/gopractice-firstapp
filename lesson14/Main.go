@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"time"
+	"sync"
 )
 
 // Goroutines
@@ -13,11 +14,14 @@ import (
 // - Parallelism
 // - Best Practices
 
+var wg = sync.WaitGroup{}
+
 func main() {
 	// example01()
 	// example02()
-	example03()
-	example04()
+	// example03()
+	// example04()
+	example05()
 }
 
 func sayHello() {
@@ -56,4 +60,16 @@ func example04() {
 	}(msg)
 	msg = "Goodbye"
 	time.Sleep(100 * time.Millisecond)
+}
+
+// example05 WaitGroup
+func example05() {
+	var msg = "Hello in example05"
+	wg.Add(1)
+	go func(msg string) {
+		fmt.Println(msg)
+		wg.Done()
+	}(msg)
+	msg = "Goodbye"
+	wg.Wait()
 }
