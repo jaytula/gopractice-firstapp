@@ -21,7 +21,8 @@ func main() {
 	// example02()
 	// example03()
 	// example04()
-	example05()
+	// example05()
+	example06()
 }
 
 func sayHello() {
@@ -71,5 +72,27 @@ func example05() {
 		wg.Done()
 	}(msg)
 	msg = "Goodbye"
+	wg.Wait()
+}
+
+// example06 No consistent ordering. Race condition
+var counter = 0
+
+func sayHello06() {
+	fmt.Printf("Hello #%v\n", counter)
+	wg.Done()
+}
+
+func increment06() {
+  	counter++
+		wg.Done()
+}
+
+func example06() {
+	for i := 0; i < 10; i++ {
+		wg.Add(2)
+		go sayHello06()
+		go increment06()
+	}
 	wg.Wait()
 }
