@@ -22,7 +22,8 @@ func main() {
 	// example03()
 	// example04()
 	// example05()
-	example06()
+	// example06()
+	example07()
 }
 
 func sayHello() {
@@ -95,4 +96,33 @@ func example06() {
 		go increment06()
 	}
 	wg.Wait()
+}
+
+// example07 Mutex attempted fix.  Not quite right.
+var mutex07 = sync.RWMutex{}
+var wg07 = sync.WaitGroup{}
+
+var counter07 = 0
+
+func sayHello07() {
+	mutex07.RLock()
+	fmt.Printf("Hello #%v\n", counter07)
+	mutex07.RUnlock()
+	wg07.Done()
+}
+
+func increment07() {
+	  mutex07.Lock()
+  	counter07++
+		mutex07.Unlock()
+		wg07.Done()
+}
+
+func example07() {
+	for i := 0; i < 10; i++ {
+		wg07.Add(2)
+		go sayHello07()
+		go increment07()
+	}
+	wg07.Wait()
 }
