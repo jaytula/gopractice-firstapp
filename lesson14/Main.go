@@ -23,7 +23,8 @@ func main() {
 	// example04()
 	// example05()
 	// example06()
-	example07()
+	// example07()
+	example08()
 }
 
 func sayHello() {
@@ -125,4 +126,34 @@ func example07() {
 		go increment07()
 	}
 	wg07.Wait()
+}
+
+// example08 Lock mutex out of go routine in a single context
+var mutex08 = sync.RWMutex{}
+var wg08 = sync.WaitGroup{}
+
+var counter08 = 0
+
+func sayHello08() {
+	fmt.Printf("Hello #%v\n", counter08)
+	mutex08.RUnlock()
+	wg08.Done()
+}
+
+func increment08() {
+  	counter08++
+		mutex08.Unlock()
+		wg08.Done()
+}
+
+func example08() {
+	for i := 0; i < 10; i++ {
+		wg08.Add(2)
+		mutex08.RLock()
+		go sayHello08()
+	  mutex08.Lock()
+		go increment08()
+
+	}
+	wg08.Wait()
 }
