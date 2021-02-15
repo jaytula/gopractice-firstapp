@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 	"sync"
+	"runtime"
 )
 
 // Goroutines
@@ -24,7 +25,13 @@ func main() {
 	// example05()
 	// example06()
 	// example07()
-	example08()
+	// example08()
+
+	// GOMAXPROCS can be tuned with values above number of operating system threads for best performance
+	fmt.Printf("Threads: %v\n", runtime.GOMAXPROCS(-1))  // interrogate how many thread available
+	runtime.GOMAXPROCS(1) // Set to be single-threaded
+	fmt.Printf("Threads: %v\n", runtime.GOMAXPROCS(-1))  // interrogate how many thread available
+
 }
 
 func sayHello() {
