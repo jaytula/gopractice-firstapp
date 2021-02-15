@@ -13,7 +13,14 @@ import (
 //   - WaitGroups
 //   - Mutexes
 // - Parallelism
+
 // - Best Practices
+//   - Don't create goroutines in libraries
+//     - Let consumer control concurrency
+//   - When creating a goroutine, know how it will end
+//     - Avoid subtle memory leaks
+//   - Check for race conditions at compie time
+//     - `go run --race main.go`
 
 var wg = sync.WaitGroup{}
 
@@ -28,10 +35,10 @@ func main() {
 	// example08()
 
 	// GOMAXPROCS can be tuned with values above number of operating system threads for best performance
+	//fmt.Printf("Threads: %v\n", runtime.GOMAXPROCS(-1))  // interrogate how many thread available
+	//runtime.GOMAXPROCS(1) // Set to be single-threaded
 	fmt.Printf("Threads: %v\n", runtime.GOMAXPROCS(-1))  // interrogate how many thread available
-	runtime.GOMAXPROCS(1) // Set to be single-threaded
-	fmt.Printf("Threads: %v\n", runtime.GOMAXPROCS(-1))  // interrogate how many thread available
-
+  example03()
 }
 
 func sayHello() {
