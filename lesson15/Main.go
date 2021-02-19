@@ -17,7 +17,8 @@ import (
 var wg = sync.WaitGroup{}
 
 func main() {
-  example01()
+  // example01()
+	example02()
 }
 
 // Create an int channel and send 42 into it in one goroutine
@@ -40,5 +41,25 @@ func example01() {
 		i = 27
 		wg.Done()
 	}()
+	wg.Wait()
+}
+
+// example02 deadlock example
+func example02() {
+	ch := make(chan int)
+	go func() {
+		i := <-ch
+		fmt.Println(i)
+		wg.Done()
+	}()
+
+	for j := 0; j < 5; j++ {
+		wg.Add(2)
+
+    go func() {
+			ch <- 42  // unbuffered channel. will stop execution until it can be received.  first time yes but second time will deadlock
+			wg.Done()
+		}()
+	}
 	wg.Wait()
 }
