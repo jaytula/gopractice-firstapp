@@ -88,3 +88,26 @@ func example03() {
 	}()
 	wg.Wait()
 }
+
+// example04
+func example04() {
+	ch := make(chan int) // bi-direction channel
+	wg.Add(2)
+
+	// ch is a receive only channel
+	go func(ch <-chan int) {
+		i := <- ch
+		fmt.Println(i)
+		// ch <- 27 would be error
+		wg.Done()
+	}(ch)
+
+
+	// ch param is a send-only channel
+	go func(ch chan<- int) {
+		ch <- 42
+    // fmt.Println(<-ch) would be error
+		wg.Done()
+	}(ch)
+	wg.Wait()
+}
