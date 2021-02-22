@@ -19,7 +19,8 @@ var wg = sync.WaitGroup{}
 func main() {
   // example01()
 	// example02()
-	example03()
+	// example03()
+	example05()
 }
 
 // Create an int channel and send 42 into it in one goroutine
@@ -107,6 +108,24 @@ func example04() {
 	go func(ch chan<- int) {
 		ch <- 42
     // fmt.Println(<-ch) would be error
+		wg.Done()
+	}(ch)
+	wg.Wait()
+}
+
+// example05 - deadlocks
+func example05() {
+	ch := make(chan int)
+	wg.Add(2)
+	go func(ch <-chan int) {
+		i := <-ch
+		fmt.Println(i)
+		wg.Done()
+	}(ch)
+
+	go func(ch chan<- int) {
+		ch <- 42
+		ch <- 27
 		wg.Done()
 	}(ch)
 	wg.Wait()
