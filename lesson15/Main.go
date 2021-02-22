@@ -114,6 +114,8 @@ func example04() {
 }
 
 // example05 - deadlocks
+// buffered channels is the right way to handle here. they are meant for cases where there is a burst of sent data
+// faster than can be processed by the receiver
 func example05() {
 	ch := make(chan int, 50) // Add buffer. Creates a buffer that can store 50 integers. Works around deadlock.
 	wg.Add(2)
