@@ -120,6 +120,8 @@ func example05() {
 	go func(ch <-chan int) {
 		i := <-ch
 		fmt.Println(i)
+		i = <-ch
+		fmt.Println(i)  // Added to receive the other integer 27 sent to the channel below
 		wg.Done()
 	}(ch)
 
