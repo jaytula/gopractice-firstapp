@@ -115,7 +115,7 @@ func example04() {
 
 // example05 - deadlocks
 func example05() {
-	ch := make(chan int)
+	ch := make(chan int, 50) // Add buffer. Creates a buffer that can store 50 integers. Works around deadlock.
 	wg.Add(2)
 	go func(ch <-chan int) {
 		i := <-ch
@@ -125,7 +125,7 @@ func example05() {
 
 	go func(ch chan<- int) {
 		ch <- 42
-		ch <- 27
+		ch <- 27  // Buffered channel avoids deadlock but we loose this.
 		wg.Done()
 	}(ch)
 	wg.Wait()
