@@ -20,7 +20,8 @@ func main() {
   // example01()
 	// example02()
 	// example03()
-	example05()
+	// example05()
+	example06()
 }
 
 // Create an int channel and send 42 into it in one goroutine
@@ -124,6 +125,25 @@ func example05() {
 		fmt.Println(i)
 		i = <-ch
 		fmt.Println(i)  // Added to receive the other integer 27 sent to the channel below
+		wg.Done()
+	}(ch)
+
+	go func(ch chan<- int) {
+		ch <- 42
+		ch <- 27  // Buffered channel avoids deadlock but we loose this.
+		wg.Done()
+	}(ch)
+	wg.Wait()
+}
+
+// example06: fix deadlock in sender but deadlocking in receiver
+func example06() {
+	ch := make(chan int, 50)
+	wg.Add(2)
+	go func(ch <-chan int) {
+		for i := range ch {
+			fmt.Println(i)
+		}
 		wg.Done()
 	}(ch)
 
