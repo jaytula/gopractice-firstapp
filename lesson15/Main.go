@@ -150,6 +150,7 @@ func example06() {
 	go func(ch chan<- int) {
 		ch <- 42
 		ch <- 27  // Buffered channel avoids deadlock but we loose this.
+		close(ch) // Let channel know that there's nothing left. Fixes deadlock issue as we signaled to for-range loop.
 		wg.Done()
 	}(ch)
 	wg.Wait()
