@@ -21,7 +21,8 @@ func main() {
 	// example02()
 	// example03()
 	// example05()
-	example06()
+	// example06()
+	example07()
 }
 
 // Create an int channel and send 42 into it in one goroutine
@@ -143,6 +144,30 @@ func example06() {
 	go func(ch <-chan int) {
 		for i := range ch {
 			fmt.Println(i)
+		}
+		wg.Done()
+	}(ch)
+
+	go func(ch chan<- int) {
+		ch <- 42
+		ch <- 27  // Buffered channel avoids deadlock but we loose this.
+		close(ch) // Let channel know that there's nothing left. Fixes deadlock issue as we signaled to for-range loop.
+		wg.Done()
+	}(ch)
+	wg.Wait()
+}
+
+// example07: Comma-ok syntax to check if channel is closed
+func example07() {
+	ch := make(chan int, 50)
+	wg.Add(2)
+	go func(ch <-chan int) {
+		for {
+			if i, ok := <- ch; ok {
+			fmt.Println(i)
+		  } else {
+				break
+			}
 		}
 		wg.Done()
 	}(ch)
