@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 
@@ -22,7 +23,8 @@ func main() {
 	// example03()
 	// example05()
 	// example06()
-	example07()
+	// example07()
+	example08()
 }
 
 // Create an int channel and send 42 into it in one goroutine
@@ -179,4 +181,32 @@ func example07() {
 		wg.Done()
 	}(ch)
 	wg.Wait()
+}
+
+// example08: Select statements
+
+const (
+	logInfo = "INFO"
+	logWarining = "WARNING"
+	logError = "ERROR"
+)
+
+type logEntry struct {
+	time time.Time
+	severity string
+	message string
+}
+var logCh = make(chan logEntry, 50)
+
+func example08() {
+  go logger()
+	logCh <- logEntry{time.Now(), logInfo, "App is starting"}
+	logCh <- logEntry{time.Now(), logInfo, "App is shutting down"}
+	time.Sleep(100 * time.Millisecond)
+}
+
+func logger() {
+	for entry := range logCh {
+		fmt.Printf("%v - [%v]%v\n", entry.time.Format("2006-01-02T15:04:05"), entry.severity, entry.message)
+	}
 }
