@@ -200,6 +200,10 @@ var logCh = make(chan logEntry, 50)
 
 func example08() {
   go logger()
+	// close channel when example08 exits
+	defer func() {
+    close(logCh)
+	}()
 	logCh <- logEntry{time.Now(), logInfo, "App is starting"}
 	logCh <- logEntry{time.Now(), logInfo, "App is shutting down"}
 	time.Sleep(100 * time.Millisecond)
