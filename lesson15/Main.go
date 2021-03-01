@@ -24,7 +24,8 @@ func main() {
 	// example05()
 	// example06()
 	// example07()
-	example08()
+	// example08()
+	example09()
 }
 
 // Create an int channel and send 42 into it in one goroutine
@@ -212,5 +213,32 @@ func example08() {
 func logger() {
 	for entry := range logCh {
 		fmt.Printf("%v - [%v]%v\n", entry.time.Format("2006-01-02T15:04:05"), entry.severity, entry.message)
+	}
+}
+
+// example09: The real select statement example
+
+var doneCh = make(chan struct{}) // zero memory allocation. signal only channel
+
+func example09() {
+	go logger09()
+
+	logCh <- logEntry{time.Now(), logInfo, "App is starting"}
+	logCh <- logEntry{time.Now(), logInfo, "App is shutting down"}
+	time.Sleep(100 * time.Millisecond)
+	doneCh <- struct{}{}
+}
+
+func logger09() {
+	for {
+		// blocks until one of the channels receives a message
+		select {
+		case entry := <- logCh:
+			fmt.Printf("%v - [%v]%v\n", entry.time.Format("2006-01-02T15:04:05"), entry.severity, entry.message)
+		case <-doneCh:
+			break
+		// default:
+		// 	fmt.Println("Non-blocking case")
+		}
 	}
 }
